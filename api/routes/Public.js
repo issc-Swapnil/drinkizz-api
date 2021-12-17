@@ -3,11 +3,12 @@ const router = express.Router();
 
 const ProductController = require('../controller/Product')
 
-router.post('/register' , ProductController.getAllData);
-router.post('/register' , ProductController.getAllData);
 
+//product routes
 router.get('/product' , ProductController.getAllData);
 router.post('/product' , ProductController.addProduct);
-router.delete('/product' , ProductController.deleteData)
+router.get('/product/:id' , ProductController.getSingleProduct);
+router.post('/product/:id' , ProductController.updateProduct);
+router.delete('/product/:id' , ProductController.deleteData)
 
 module.exports = router;
