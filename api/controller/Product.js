@@ -37,6 +37,22 @@ const getSingleProduct = async (req, res,) => {
     }
 };
 
+const getProductByCategory = async (req, res,) => {
+    const name = req.params.category;
+    console.log(name)
+    try {
+        const product = await Product.find(
+            { category: { $regex: name, $options: 'i' } }
+        )
+        res.status(200).json(product);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: error
+        });
+    }
+};
+
 
 //add product
 const addProduct = async (req, res) => {
@@ -92,5 +108,11 @@ const deleteData = async (req, res) => {
 
 module.exports =
 {
-    getAllData,addProduct,deleteData,getSingleProduct,updateProduct
+    getAllData,
+    addProduct,
+    deleteData, 
+    getSingleProduct, 
+    updateProduct,
+    getProductByCategory
+
 }
