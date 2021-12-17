@@ -2,7 +2,7 @@ const express = require('express')
 const app =express()
 const morgan = require('morgan')
 const db = require('./db')
-const publicRoutes = require('./api/routes/public');
+const publicRoutes = require('./api/routes/Public');
 
 const bodyParser = require('body-parser')
 app.use(morgan('dev'))
