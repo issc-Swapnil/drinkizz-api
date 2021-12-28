@@ -62,6 +62,7 @@ const addProduct = async (req, res) => {
         price: req.body.price,
         rating: req.body.rating,
         image: req.body.image,
+        size:req.body.size
     });
     product.save()
         .then(result => {

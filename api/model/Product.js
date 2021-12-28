@@ -13,6 +13,10 @@ const ProductSchema = mongoose.Schema({
         type:Number,
         required: 'Please Enter Price'
     },
+    size:{
+        type:String,
+        required:'Please Enter Size'
+    },
     rating:{
         type:Number,
         required: 'Please Enter ratings'
