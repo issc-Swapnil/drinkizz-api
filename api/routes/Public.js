@@ -21,7 +21,7 @@ router.delete('/wishlist/:id' , WishlistController.deleteData)
 
 //cart routes
 router.get('/cart' ,CartController.getData)
-router.post('/cart' , CartController.addCart)
+router.post('/cart/:id' , CartController.addCart)
 router.delete('/cart/:id' , CartController.deletecart)
 
 

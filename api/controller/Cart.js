@@ -25,6 +25,8 @@ const Cart = require('../model/Cart')
 
  //add data 
  const addCart= async(req,res)=>{
+    const id = req.params.id;
+    const cartProduct = await Cart.findById(id)
      const cart = Cart({
         name: req.body.name,
         category: req.body.category,
@@ -33,16 +35,23 @@ const Cart = require('../model/Cart')
         image: req.body.image,
         size:req.body.size
      })
-     cart.save().then(result => {
-        res.status(201).json({
-            message: "Thank you for adding data"
-        });
-    })
-    .catch(err => {
+     try{
+        if(cartProduct){
+            res.status(201).json({
+                message: "Data already at cart"
+            });
+        }else{
+           cart.save().then(result => {
+               res.status(201).json({
+                   message: "Data added to cart"
+               });
+           })
+        }
+     }catch(err) {
         res.status(500).json({
             error: err,
         });
-    });
+    };
  }
 
 
