@@ -23,25 +23,35 @@ const getAllData = async (req, res,) => {
 
 //add product
 const addWishlist = async (req, res) => {
+    const id = req.params.id;
+    const wishlstProduct = await Wishlist.findById(id)
+
     const wishList = Wishlist({
         name: req.body.name,
         category: req.body.category,
-        size:req.body.size,
+        size: req.body.size,
         price: req.body.price,
         rating: req.body.rating,
         image: req.body.image,
     });
-    wishList.save()
-        .then(result => {
+    try {
+        if (wishlstProduct) {
             res.status(201).json({
-                message: "Thank you for adding data"
+                message: "This is already in your wishlist"
             });
-        })
-        .catch(err => {
-            res.status(500).json({
-                error: err,
-            });
+        } else {
+            wishList.save()
+                .then(result => {
+                    res.status(201).json({
+                        message: "Thank you for adding data"
+                    });
+                })
+        }
+    } catch (err) {
+        res.status(500).json({
+            error: err,
         });
+    }
 }
 
 
@@ -59,4 +69,4 @@ const deleteData = async (req, res) => {
     }
 }
 
-module.exports = {getAllData  ,addWishlist ,deleteData}
+module.exports = { getAllData, addWishlist, deleteData }
