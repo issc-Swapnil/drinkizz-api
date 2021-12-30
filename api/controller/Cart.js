@@ -60,8 +60,10 @@ const Cart = require('../model/Cart')
     const id = req.params.id;
     try {
         const deleteData = await Cart.findByIdAndRemove(id)
+        const cart = await Cart.find().sort({ _id: -1 })
         res.status(200).json({
-            message: "Record Deleted Successfully"
+            message: "Record Deleted Successfully",
+            data:cart
         })
     } catch (error) {
         res.status(500).json(error)
