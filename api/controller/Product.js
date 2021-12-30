@@ -11,7 +11,7 @@ const getAllData = async (req, res,) => {
                 data: productList
             });
         } else {
-            res.status(404).json({
+            res.status(204).json({
                 message: 'No entries found in table'
             });
         }

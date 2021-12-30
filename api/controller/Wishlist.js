@@ -12,7 +12,7 @@ const getAllData = async (req, res,) => {
                 data: wishList
             });
         } else {
-            res.status(203).json({
+            res.status(204).json({
                 message: 'No entries found in table'
             });
         }
