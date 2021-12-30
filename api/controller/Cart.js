@@ -12,7 +12,7 @@ const Cart = require('../model/Cart')
                 data: cart
             });
         } else {
-            res.status(204).json({
+            res.status(200).json({
                 message: 'No entries found in table'
             });
         }
