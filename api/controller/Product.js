@@ -28,7 +28,7 @@ const getSingleProduct = async (req, res,) => {
         if (product.length != 0) {
             res.status(200).json(product);
         } else {
-            res.status(404).json({
+            res.status(203).json({
                 message: 'No valid entry found for provided ID'
             });
         }
