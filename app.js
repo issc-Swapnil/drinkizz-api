@@ -3,6 +3,7 @@ const app =express()
 const morgan = require('morgan')
 const db = require('./db')
 const publicRoutes = require('./api/routes/Public');
+const userRoutes = require('./api/routes/User')
 
 const bodyParser = require('body-parser')
 app.use(morgan('dev'))
@@ -24,7 +25,9 @@ app.use((req,res,next)=>{
 });
 
 
-app.use('/public' , publicRoutes)
+app.use("/user", userRoutes);
+app.use("/public", publicRoutes);
+
 
 app.get('/', (req, res) => {
 	res.send('Welcome to daruwale!')
