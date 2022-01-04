@@ -22,7 +22,9 @@ exports.user_signup = (req, res, next) => {
             const user = new User({
               username: req.body.username,
               email: req.body.email,
-              name: req.body.name,
+              phone:req.body.phone,
+              firstname: req.body.firstname,
+              lastname:req.body.lastname,
               password: hash
             });
             user
@@ -45,12 +47,12 @@ exports.user_signup = (req, res, next) => {
 };
 
 exports.user_login = (req, res, next) => {
-  User.find({ username: req.body.username })
+  User.find({ email: req.body.email })
     .exec()
     .then(user => {
       if (user.length < 1) {
         return res.status(201).json({
-          message: "Username Is Wrong"
+          message: "Email Is Wrong"
         });
       }
       bcrypt.compare(req.body.password, user[0].password, (err, result) => {
@@ -72,7 +74,8 @@ exports.user_login = (req, res, next) => {
           );
           return res.status(200).json({
             message: "Login Successful",
-            token: token
+            token: token,
+            data:user[0].firstname
           });
         }
         res.status(201).json({
