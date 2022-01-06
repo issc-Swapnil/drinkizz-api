@@ -5,7 +5,7 @@ const Cart = require('../model/Cart')
 //get all data
  const getData =async(req,res)=>{
      try{
-        const cart = await Cart.find({"user":req.params.userId}).populate("product","name price size category image").sort({ _id: -1 })
+        const cart = await Cart.find({"user":req.params.userId}).populate("product","name category price size image rating testingNote FoodPairing  ABV subCategory").sort({ _id: -1 })
         if (cart.length != 0) {
             res.status(200).json({
                 totalcart: cart.length,
