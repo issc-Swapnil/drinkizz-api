@@ -1,4 +1,5 @@
-const mongoose =require('mongoose')
+const mongoose =require('mongoose');
+const { deleteOne } = require('../model/Cart');
 const Cart = require('../model/Cart')
 
 
@@ -53,14 +54,14 @@ const Cart = require('../model/Cart')
 
  //delete cart 
  const deletecart =  async (req, res) => {
-    const id = req.params.id;
+     const id = req.body.id
     try {
-        const deleteData = await Cart.find({ "_id":req.body.id, "user": req.body.userId }).remove()
-        const cart = await Cart.find().sort({ _id: -1 })
-        res.status(200).json({
-            message: "Record Deleted Successfully",
-            data:cart
-        })
+        const deleteData = await Cart.findByIdAndRemove(id)
+        if(deleteData){
+            res.status(200).json({
+                message: "Record Deleted Successfully",
+            })
+        }
     } catch (error) {
         res.status(500).json(error)
     }
