@@ -55,7 +55,7 @@ const Cart = require('../model/Cart')
  const deletecart =  async (req, res) => {
     const id = req.params.id;
     try {
-        const deleteData = await Cart.findByIdAndRemove(id)
+        const deleteData = await Cart.find({ "_id":req.body.id, "user": req.body.userId }).remove()
         const cart = await Cart.find().sort({ _id: -1 })
         res.status(200).json({
             message: "Record Deleted Successfully",
