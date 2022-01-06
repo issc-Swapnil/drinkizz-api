@@ -24,7 +24,24 @@ const ProductSchema = mongoose.Schema({
     image:{
         type:String,
         required: 'Please Select Image'
+    },
+    description:{
+        type:String,
+        required:'Please Select description'
+    },
+    tesetingNote: {
+        type: String
+    },
+    FoodPairing:{
+        type:String
+    },
+    ABV:{
+        type:String
+    },
+    subCategory:{
+        type:String
     }
+
 }, { timestamps: true });
 
 module.exports = mongoose.model('Product', ProductSchema)

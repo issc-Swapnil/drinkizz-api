@@ -5,7 +5,8 @@ const Wishlist = require("../model/Wishlist");
 //get all wishlist data
 const getAllData = async (req, res,) => {
     try {
-        const wishList = await Wishlist.find().sort({ _id: -1 })
+        const wishList = await Wishlist.find({ "user": req.params.userId })
+            .populate('product', 'name category price size image').sort({ _id: -1 })
         if (wishList.length != 0) {
             res.status(200).json({
                 totalwishlist: wishList.length,
@@ -23,19 +24,13 @@ const getAllData = async (req, res,) => {
 
 //add product
 const addWishlist = async (req, res) => {
-    const id = req.params.id;
-    const wishlstProduct = await Wishlist.findById(id)
-
+    const wishlstProduct = await Wishlist.find({ "product": req.body.productId, "user": req.body.userId })
     const wishList = Wishlist({
-        name: req.body.name,
-        category: req.body.category,
-        size: req.body.size,
-        price: req.body.price,
-        rating: req.body.rating,
-        image: req.body.image,
-    });
+        product: req.body.productId,
+        user: req.body.userId
+    })
     try {
-        if (wishlstProduct) {
+        if (wishlstProduct.length > 0) {
             res.status(201).json({
                 message: "This is already in your wishlist"
             });
@@ -43,7 +38,7 @@ const addWishlist = async (req, res) => {
             wishList.save()
                 .then(result => {
                     res.status(201).json({
-                        message: "Thank you for adding data"
+                        message: "Product added to Wishlist"
                     });
                 })
         }

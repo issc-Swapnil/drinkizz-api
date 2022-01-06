@@ -5,18 +5,18 @@ const Cart = require('../model/Cart')
 //get all data
  const getData =async(req,res)=>{
      try{
-        const cart = await Cart.find().sort({ _id: -1 })
+        const cart = await Cart.find({"user":req.params.userId}).populate("product","name price size category image").sort({ _id: -1 })
         if (cart.length != 0) {
             res.status(200).json({
                 totalcart: cart.length,
-                data: cart
+                data:  cart
             });
+
         } else {
             res.status(204).json({
                 message: 'No entries found in table'
             });
         }
-
      }catch(error){
         res.send('Error => ' + error)
 
@@ -25,18 +25,14 @@ const Cart = require('../model/Cart')
 
  //add data 
  const addCart= async(req,res)=>{
-    const id = req.params.id;
-    const cartProduct = await Cart.findById(id)
+    const cartProduct = await Cart.find({"product":req.body.productId , "user":req.body.userId})
      const cart = Cart({
-        name: req.body.name,
-        category: req.body.category,
-        price: req.body.price,
-        quantity: req.body.quantity,
-        image: req.body.image,
-        size:req.body.size
+        product:req.body.productId,
+        user:req.body.userId,
+        quantity: req.body.quantity
      })
      try{
-        if(cartProduct){
+        if(cartProduct.length > 0){
             res.status(201).json({
                 message: "Data already at cart"
             });

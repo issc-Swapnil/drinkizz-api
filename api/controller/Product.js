@@ -62,7 +62,12 @@ const addProduct = async (req, res) => {
         price: req.body.price,
         rating: req.body.rating,
         image: req.body.image,
-        size:req.body.size
+        size:req.body.size,
+        description:req.body.description,
+        testingNote:req.body.testingNote,
+        FoodPairing:req.body.FoodPairing,
+        ABV:req.body.ABV,
+        subCategory:req.body.subCategory
     });
     product.save()
         .then(result => {

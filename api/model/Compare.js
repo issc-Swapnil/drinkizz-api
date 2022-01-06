@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const CartSchema = mongoose.Schema({
+const CompareSchema = mongoose.Schema({
     product: { 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Product' 
@@ -8,12 +8,7 @@ const CartSchema = mongoose.Schema({
     user:{
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'User' 
-    },
-    quantity:{
-        type:Number,
-        required:'Please Enter quantity'
-    },
-  
+    }
 }, { timestamps: true });
 
-module.exports = mongoose.model('Cart', CartSchema)
+module.exports = mongoose.model('Compare', CompareSchema)

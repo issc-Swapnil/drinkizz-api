@@ -1,29 +1,13 @@
 const mongoose = require('mongoose')
 
 const WishlistSchema = mongoose.Schema({
-    name: {
-        type: String,
-        required: 'Please Enter Name'
+    product: { 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Product' 
     },
-    category:{
-        type:String,
-        required: 'Please Enter Category'
-    },
-    price:{
-        type:Number,
-        required: 'Please Enter Price'
-    },
-    size:{
-        type:String,
-        require:'Please Enter Size'
-    },
-    rating:{
-        type:Number,
-        required: 'Please Enter ratings'
-    },
-    image:{
-        type:String,
-        required: 'Please Select Image'
+    user:{
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'User' 
     }
 }, { timestamps: true });
 

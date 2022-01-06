@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../model/User");
 
 exports.user_signup = (req, res, next) => {
+  console.log(req.body);
   User.find({ username: req.body.username })
     .exec()
     .then(user => {
@@ -22,9 +23,9 @@ exports.user_signup = (req, res, next) => {
             const user = new User({
               username: req.body.username,
               email: req.body.email,
-              phone:req.body.phone,
+              phone: req.body.phone,
               firstname: req.body.firstname,
-              lastname:req.body.lastname,
+              lastname: req.body.lastname,
               password: hash
             });
             user
@@ -75,7 +76,10 @@ exports.user_login = (req, res, next) => {
           return res.status(200).json({
             message: "Login Successful",
             token: token,
-            data:user[0].firstname
+            data: {
+              name: user[0].firstname,
+              userId: user[0]._id
+            }
           });
         }
         res.status(201).json({
