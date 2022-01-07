@@ -6,14 +6,10 @@ const Compare = require("../model/Compare");
 const getAllData = async (req, res,) => {
     try {
         const compare = await Compare.find({"user":req.params.userId}).populate('product', 'name category price size image rating testingNote FoodPairing  ABV subCategory').sort({ _id: -1 })
-        if (compare.length != 0 && compare.length <3) {
+        if (compare.length != 0) {
             res.status(200).json({
                 totalcompare: compare.length,
                 data: compare
-            });
-        } else if(compare.length >=3){
-            res.status(201).json({
-                message: 'You can compare only 3 Products'
             });
         }else {
             res.status(204).json({
@@ -36,6 +32,10 @@ const addCompare = async (req, res) => {
         if (CompareProduct.length > 0) {
             res.status(201).json({
                 message: "This is already in your compare "
+            });
+        }else if(CompareProduct.length >3){
+            res.status(201).json({
+                message: "You can add only 3 products "
             });
         } else {
             comapre.save()
