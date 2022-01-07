@@ -54,7 +54,7 @@ const addCart = async (req, res) => {
 
 //delete cart 
 const deletecart = async (req, res) => {
-    const id = req.body.id
+    const id = req.params.id
     try {
         const deleteData = await Cart.findByIdAndRemove(id)
         res.status(200).json({

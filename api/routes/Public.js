@@ -18,17 +18,17 @@ router.get('/product/:id' , ProductController.getSingleProduct);
 //wishlist routes 
 router.get('/wishlist/:userId' ,WishlistController.getAllData )
 router.post('/wishlist' ,WishlistController.addWishlist )
-router.delete('/wishlist' , WishlistController.deleteData)
+router.delete('/wishlist/:id' , WishlistController.deleteData)
 
 //cart routes
 router.get('/cart/:userId' ,CartController.getData)
 router.post('/cart' , CartController.addCart)
-router.delete('/cart' , CartController.deletecart)
+router.delete('/cart/:id' , CartController.deletecart)
 
 //compare routes
 router.get('/compare/:userId', CompareController.getAllData );
 router.post('/compare', CompareController.addCompare );
-router.delete('/compare', CompareController.deleteData );
+router.delete('/compare/:id', CompareController.deleteData );
 
 
 module.exports = router;

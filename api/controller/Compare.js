@@ -57,12 +57,11 @@ const addCompare = async (req, res) => {
 //delete data
 const deleteData = async (req, res) => {
     try {
-        const deleteData = await Compare.findByIdAndRemove(req.body.id)
-        if(deleteData){
+        const deleteData = await Compare.findByIdAndRemove(req.params.id)
             res.status(200).json({
                 message: "Record Deleted Successfully",
             })
-        }
+        
     } catch (error) {
         res.status(500).json(error)
     }

@@ -55,7 +55,7 @@ const addWishlist = async (req, res) => {
 const deleteData = async (req, res) => {
     
     try {
-        const deleteData = await Wishlist.findByIdAndRemove(req.body.id)
+        const deleteData = await Wishlist.findByIdAndRemove(req.params.id)
             res.status(200).json({
                 message: "Record Deleted Successfully",
             })
