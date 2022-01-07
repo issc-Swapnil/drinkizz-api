@@ -23,27 +23,33 @@ const getAllData = async (req, res,) => {
 
 //add product
 const addCompare = async (req, res) => {
+    const comapareList = await Compare.find({"user":req.body.userId});
     const CompareProduct = await Compare.find({"product":req.body.productId , "user":req.body.userId})
+
     const comapre = Compare({
         product: req.body.productId,
         user:req.body.userId,
     })
     try {
-        if ( CompareProduct.length >3) {
+        if (comapareList.length >2) {
             res.status(201).json({
                 message: "You can add only 3 products "
             });
-        }else if(CompareProduct.length > 0){
-            res.status(201).json({
-                message: "This is already in your compare "
-            });
-        } else {
-            comapre.save()
+        }
+        else {
+            if(CompareProduct.length > 0){
+                res.status(201).json({
+                    message: "This is already in your compare "
+                });
+            }
+            else{
+                comapre.save()
                 .then(result => {
                     res.status(201).json({
                         message: "Product added to compare"
                     });
                 })
+            }
         }
     } catch (err) {
         res.status(500).json({
