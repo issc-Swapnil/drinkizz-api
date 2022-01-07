@@ -29,13 +29,13 @@ const addCompare = async (req, res) => {
         user:req.body.userId,
     })
     try {
-        if (CompareProduct.length > 0) {
-            res.status(201).json({
-                message: "This is already in your compare "
-            });
-        }else if(Compare.length >3){
+        if ( Compare.length >3) {
             res.status(201).json({
                 message: "You can add only 3 products "
+            });
+        }else if(CompareProduct.length > 0){
+            res.status(201).json({
+                message: "This is already in your compare "
             });
         } else {
             comapre.save()
