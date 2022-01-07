@@ -56,11 +56,10 @@ const deleteData = async (req, res) => {
     
     try {
         const deleteData = await Wishlist.findByIdAndRemove(req.body.id)
-        if(deleteData){
             res.status(200).json({
                 message: "Record Deleted Successfully",
             })
-        }
+
     } catch (error) {
         res.status(500).json(error)
     }

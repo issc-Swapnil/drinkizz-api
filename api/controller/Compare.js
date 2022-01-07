@@ -56,7 +56,6 @@ const addCompare = async (req, res) => {
 
 //delete data
 const deleteData = async (req, res) => {
-    const id = req.params.id;
     try {
         const deleteData = await Compare.findByIdAndRemove(req.body.id)
         if(deleteData){
