@@ -33,7 +33,7 @@ const addCompare = async (req, res) => {
             res.status(201).json({
                 message: "This is already in your compare "
             });
-        }else if(CompareProduct.length >3){
+        }else if(Compare.length >3){
             res.status(201).json({
                 message: "You can add only 3 products "
             });
