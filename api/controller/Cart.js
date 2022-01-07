@@ -56,10 +56,16 @@ const addCart = async (req, res) => {
 const deletecart = async (req, res) => {
     const id = req.params.id
     try {
-        const deleteData = await Cart.findByIdAndRemove(id)
-        res.status(200).json({
-            message: "Record Deleted Successfully",
-        })
+        const deletedData = await Cart.findByIdAndRemove(id)
+        if(deletedData){
+            res.status(200).json({
+                message: "Record Deleted Successfully",
+            })
+        }else{
+            res.status(204).json({
+                message: "Cart data Not found",
+            })
+        }
 
     } catch (error) {
         res.status(500).json(error)
