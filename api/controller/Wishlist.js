@@ -55,10 +55,16 @@ const addWishlist = async (req, res) => {
 const deleteData = async (req, res) => {
     
     try {
-        const deleteData = await Wishlist.findByIdAndRemove(req.params.id)
+        const deletedData = await Wishlist.findByIdAndRemove(req.params.id)
+        if(deletedData){
             res.status(200).json({
                 message: "Record Deleted Successfully",
             })
+        }else{
+            res.status(204).json({
+                message: "Wislist data Not found",
+            })
+        }
 
     } catch (error) {
         res.status(500).json(error)

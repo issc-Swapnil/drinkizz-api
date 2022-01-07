@@ -6,7 +6,7 @@ const Compare = require("../model/Compare");
 const getAllData = async (req, res,) => {
     try {
         const compare = await Compare.find({"user":req.params.userId}).populate('product', 'name category price size image rating testingNote FoodPairing  ABV subCategory').sort({ _id: -1 })
-        if (compare.length != 0) {
+        if (compare.length != 0 && compare.length <3) {
             res.status(200).json({
                 totalcompare: compare.length,
                 data: compare
@@ -58,9 +58,15 @@ const addCompare = async (req, res) => {
 const deleteData = async (req, res) => {
     try {
         const deletedData = await Compare.findByIdAndRemove(req.params.id)
+        if(deletedData){
             res.status(200).json({
                 message: "Record Deleted Successfully",
             })
+        }else{
+            res.status(204).json({
+                message: "Compare data Not found",
+            })
+        }
         
     } catch (error) {
         res.status(500).json(error)
