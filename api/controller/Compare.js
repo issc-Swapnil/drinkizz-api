@@ -29,7 +29,7 @@ const addCompare = async (req, res) => {
         user:req.body.userId,
     })
     try {
-        if ( Compare.length >3) {
+        if ( CompareProduct.length >3) {
             res.status(201).json({
                 message: "You can add only 3 products "
             });
