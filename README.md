@@ -1,4 +1,4 @@
-# product-api
+#Drinkizz API
 
- 1.Product api with all the CRUD operations.
+ 1.Its an E-commers application api written in NodeJs, ExpressJs.
 
