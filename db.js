@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const url = 'mongodb+srv://naeema:jiRIeXqAVnmATW4f@cluster0.gcr60.mongodb.net/Daruwale?retryWrites=true&w=majority';
+const url = process.env.DB_URL;
 //connect DB HERE
 mongoose.connect(url, {
   useNewUrlParser: true,
